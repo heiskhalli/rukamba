@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            margin: 0;
+            font-family: sans-serif;
+    background-image: url('index1.html.jpg');
+    background-size: cover;
+    background-position: center;
+        }
+        #calculator {
+            background-color: #aca5a5;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"] {
+            width: 100%;
+            height: 50px;
+            font-size: 28px;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 22%;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px 1%;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #2b282d;
+            color: rgb(92, 117, 122);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        button:hover {
+            background-color: #a4adbc;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .function-button {
+            background-color: #ff4757;
+        }
+        .function-button:hover {
+            background-color: #ff6b814d;
+        }
+        .equal-button {
+            background-color: #2ed573;
+        }
+        .equal-button:hover {
+            background-color: #eaf1eb;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        
+        <!-- Number and basic operation buttons -->
+        <div class="button-row">
+                        <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+              <button onclick="clearDisplay()">C</button>
+            <button class="function-button" onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="function-button" onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="function-button" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button class="equal-button" onclick="calculateResult()">=</button>
+            <button class="function-button" onclick="appendToDisplay('+')">+</button>
+        </div>
+        
+        <!-- Scientific function buttons -->
+        <div class="button-row">
+            <button class="function-button" onclick="appendToDisplay('Math.sin(')">sin</button>
+            <button class="function-button" onclick="appendToDisplay('Math.cos(')">cos</button>
+            <button class="function-button" onclick="appendToDisplay('Math.tan(')">tan</button>
+            <button class="function-button" onclick="appendToDisplay('Math.log(')">log</button>
+        </div>
+        <div class="button-row">
+            <button class="function-button" onclick="appendToDisplay('Math.pow(')">x^y</button>
+            <button class="function-button" onclick="appendToDisplay('Math.sqrt(')">√</button>
+            <button class="function-button" onclick="appendToDisplay('Math.PI')">π</button>
+<button onclick="clearDisplay()">DEL</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                // Use a safer eval alternative
+                const result = Function('"use strict";return (' + display.value + ')')();
+                display.value = result;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
